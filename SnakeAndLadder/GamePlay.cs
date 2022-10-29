@@ -3,7 +3,7 @@ namespace SnakeAndLadder
 {
     public class GamePlay
     {
-        int playerPosition = 0;
+        int playerPosition = 0, playerCount = 0;
         Random random = new Random();
         const int NO_PLAY = 0, LADDER = 1, SNAKE = 2, WINNING_POSITION = 100;
         public void start()
@@ -14,6 +14,7 @@ namespace SnakeAndLadder
         public int DieRoll()
         {
             int dieRoll = random.Next(1, 7);
+            playerCount++;
             return dieRoll;
         }
         public void CheckOption()
@@ -37,6 +38,9 @@ namespace SnakeAndLadder
                             playerPosition = 0;
                         break;
                 }
+                Console.WriteLine("Player current position is {0} ",playerPosition);
+                if (playerPosition == WINNING_POSITION)
+                    Console.WriteLine("Dice was rolled {0} times to win the game",playerCount);
             }
             Console.WriteLine("Game over ! Player is at winning position {0} ", playerPosition);
         }
