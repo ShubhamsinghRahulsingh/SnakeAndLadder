@@ -5,7 +5,7 @@ namespace SnakeAndLadder
     {
         int playerPosition = 0;
         Random random = new Random();
-        const int NO_PLAY=0, LADDER = 1, SNAKE = 2;
+        const int NO_PLAY = 0, LADDER = 1, SNAKE = 2, WINNING_POSITION = 100;
         public void start()
         {
             Console.WriteLine("Lets Start the Game");
@@ -14,28 +14,28 @@ namespace SnakeAndLadder
         public int DieRoll()
         {
             int dieRoll = random.Next(1, 7);
-            Console.WriteLine("The player gets the number {0} on dice",dieRoll);
             return dieRoll;
         }
         public void CheckOption()
         {
-            int checkOption=random.Next(0,3);
-            switch(checkOption)
+            while(playerPosition <WINNING_POSITION)
             {
-                case NO_PLAY:
-                    playerPosition = 0;
-                    break;
-                case LADDER:
-                    this.playerPosition += DieRoll();
-                    break;
-                case SNAKE:
-                    this.playerPosition -= DieRoll();
-                    break;
-                default:
-                    Console.WriteLine("Invalid selection");
-                    break;
+                int checkOption = random.Next(0, 3);
+                switch (checkOption)
+                {
+                    case NO_PLAY:
+                        break;
+                    case LADDER:
+                        this.playerPosition += DieRoll();
+                        break;
+                    case SNAKE:
+                        this.playerPosition -= DieRoll();
+                        if (playerPosition < 0)
+                            playerPosition = 0;
+                        break;
+                }
             }
-            Console.WriteLine("Player is at {0} position",playerPosition);
+            Console.WriteLine("Game over ! Player is at winning position {0} ", playerPosition);
         }
 
     }
