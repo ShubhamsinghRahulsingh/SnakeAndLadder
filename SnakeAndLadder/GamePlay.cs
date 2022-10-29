@@ -18,7 +18,7 @@ namespace SnakeAndLadder
         }
         public void CheckOption()
         {
-            while(playerPosition <WINNING_POSITION)
+            while(playerPosition != WINNING_POSITION)
             {
                 int checkOption = random.Next(0, 3);
                 switch (checkOption)
@@ -26,7 +26,10 @@ namespace SnakeAndLadder
                     case NO_PLAY:
                         break;
                     case LADDER:
-                        this.playerPosition += DieRoll();
+                        int die=DieRoll();
+                        this.playerPosition += die;
+                        if(playerPosition > WINNING_POSITION)
+                            this.playerPosition -= die;
                         break;
                     case SNAKE:
                         this.playerPosition -= DieRoll();
